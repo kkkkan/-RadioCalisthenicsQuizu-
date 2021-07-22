@@ -8,12 +8,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/helloworld',
     name: 'HelloWorld',
     component: HelloWorld
   },
   {
-    path: '/quizu',
+    path: '/',
     name: 'Quizu',
     component: Quizu
   },

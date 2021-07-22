@@ -1,73 +1,49 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank"> Core Docs </a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank"> Forum </a>
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank"> Community Chat </a>
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank"> Twitter </a>
-      </li>
-      <br />
-      <li>
-        <a href="http://vuejs-templates.github.io/webpack/" target="_blank">
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a href="http://router.vuejs.org/" target="_blank"> vue-router </a>
-      </li>
-      <li>
-        <a href="http://vuex.vuejs.org/" target="_blank"> vuex </a>
-      </li>
-      <li>
-        <a href="http://vue-loader.vuejs.org/" target="_blank"> vue-loader </a>
-      </li>
-      <li>
-        <a href="https://github.com/vuejs/awesome-vue" target="_blank">
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div>
+    <draggable :options="options" element="ul">
+      <div v-for="item in items" :key="item.id" class="item">
+        {{ item.name }}
+      </div>
+    </draggable>
   </div>
 </template>
 
 <script>
+import draggable from "vuedraggable";
+
 export default {
   name: "Quizu",
+  components: { draggable },
   data() {
     return {
-      msg: "Quizu!",
+      options: {
+        animation: 200,
+      },
+      items: [
+        { id: 1, name: "name01" },
+        { id: 2, name: "name02" },
+        { id: 3, name: "name03" },
+        { id: 4, name: "name04" },
+        { id: 5, name: "name05" },
+      ],
     };
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
+.item {
+  width: 20%;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #7f7f7f;
+  border-radius: 10px;
+  background-color: #ffffff;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.item:hover {
+  cursor: grab;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.item:active {
+  cursor: grabbing;
 }
 </style>
