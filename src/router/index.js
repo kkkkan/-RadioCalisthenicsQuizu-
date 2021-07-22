@@ -1,15 +1,32 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import Quizu from '@/components/Quizu'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
-})
+
+const routes = [
+  {
+    path: '/',
+    name: 'HelloWorld',
+    component: HelloWorld
+  },
+  {
+    path: '/quizu',
+    name: 'Quizu',
+    component: Quizu
+  },
+  
+  
+]
+
+
+const router = new VueRouter({
+  mode: 'history', // URLに#がつかなくなる
+  //base: process.env.BASE_UR,
+  routes,
+});
+
+export default router;
+
