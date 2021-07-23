@@ -1,7 +1,13 @@
 <template>
   <div>
-    <p class="mb-6 indigo--text font-weight-black">残念 不正解！！</p>
-    <p class="mb-6 indigo--text">正解は以下です。</p>
+    <p class="mb-6 indigo--text font-weight-black text-h4">残念 不正解！！</p>
+    <p class="mb-6 indigo--text font-weight-medium">正解は以下です。</p>
+
+    <div>
+      <v-btn class="mb-6 white--text" color="blue darken-4" v-on:click="retry">
+        もう一度遊ぶ
+      </v-btn>
+    </div>
 
     <ul>
       <div v-for="item in items" :key="item.id" class="item">
@@ -32,7 +38,11 @@ let _rightItmes = [
 export default {
   name: "Failure",
   components: {},
-  methods: {},
+  methods: {
+    retry: function () {
+      this.$router.push("/");
+    },
+  },
   data() {
     return {
       options: {
