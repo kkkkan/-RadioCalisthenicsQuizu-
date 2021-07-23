@@ -51,6 +51,22 @@ function _getShuffuledArray() {
   return array;
 }
 
+// _rightItmesと渡された配列が同じ並びになっているか判断する
+// trueなら同じ並びになっている
+function _checkResult(array) {
+  if (array.length != _rightItmes.length) {
+    // 無いはずだが念のため
+    return false;
+  }
+  for (var i = 0; i < array.length; i++) {
+    // ひとつひとつ正しいかチェック
+    if (array[i] != _rightItmes[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 export default {
   name: "Quizu",
   components: { draggable },
@@ -61,6 +77,14 @@ export default {
         this.items = _getShuffuledArray();
         this.isStarting = true;
       } else {
+        var isSuccess = _checkResult(this.items);
+        if (isSuccess) {
+          // クイズに正解していたら
+          this.button_name = "正解";
+        } else {
+          // 間違っていたら
+          this.button_name = "間違い";
+        }
       }
     },
   },
