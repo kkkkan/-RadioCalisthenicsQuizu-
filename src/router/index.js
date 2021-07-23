@@ -39,6 +39,16 @@ const router = new VueRouter({
   mode: 'history', // URLに#がつかなくなる
   //base: process.env.BASE_UR,
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    // 画面遷移時のスクロール位置
+    if (savedPosition) {
+      // ブラウザバック時など、覚えている位置が存在しているときはそれを採用
+      return savedPosition
+    } else {
+      // そうじゃないときは必ずトップに戻る
+      return { x: 0, y: 0 }
+    }
+  }
 });
 
 export default router;
