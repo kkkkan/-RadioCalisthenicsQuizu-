@@ -67,7 +67,8 @@ function _checkResult(array) {
   }
   for (var i = 0; i < array.length; i++) {
     // ひとつひとつ正しいかチェック
-    if (array[i] != _rightItmes[i]) {
+    if (array[i].name != _rightItmes[i].name) {
+      // 「腕を振って脚を曲げ伸ばす運動」が二つあるので、idは見ずにnameだけ比べる
       return false;
     }
   }
