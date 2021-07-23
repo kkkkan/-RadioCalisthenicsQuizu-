@@ -87,10 +87,10 @@ export default {
         var isSuccess = _checkResult(this.items);
         if (isSuccess) {
           // クイズに正解していたら
-          this.button_name = "正解";
+          this.$router.push("/resultCorrect");
         } else {
           // 間違っていたら
-          this.button_name = "間違い";
+          this.$router.push("/resultFailure");
         }
       }
     },
