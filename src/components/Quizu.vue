@@ -93,21 +93,7 @@ export default {
       options: {
         animation: 200,
       },
-      items: [
-        { id: 1, name: "伸びの運動" },
-        { id: 2, name: "腕を振って脚を曲げ伸ばす運動" },
-        { id: 3, name: "腕を回す運動" },
-        { id: 4, name: "胸を反らす運動" },
-        { id: 5, name: "体を横に曲げる運動" },
-        { id: 6, name: "体を前後に曲げる運動" },
-        { id: 7, name: "体をねじる運動" },
-        { id: 8, name: "腕を上下に伸ばす運動" },
-        { id: 9, name: "体を斜め下に曲げ胸を反らす運動" },
-        { id: 10, name: "体を回す運動" },
-        { id: 11, name: "両脚で跳ぶ運動" },
-        { id: 12, name: "腕を振って脚を曲げ伸ばす運動" },
-        { id: 13, name: "深呼吸" },
-      ],
+      items: [],
       button_name: "スタート",
       isStarting: false,
     };
