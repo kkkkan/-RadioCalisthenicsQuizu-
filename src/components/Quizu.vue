@@ -1,5 +1,8 @@
 <template>
   <div>
+    <p class="mb-6 indigo--text font-weight-black">
+      13個の体操メニューを並び替えて正しいラジオ体操の順番にしてください。
+    </p>
     <draggable :options="options" element="ul">
       <div v-for="item in items" :key="item.id" class="item">
         {{ item.name }}
