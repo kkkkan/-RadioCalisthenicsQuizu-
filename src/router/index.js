@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Quizu from '@/components/Quizu'
 import Correct from '@/components/Correct'
 import Failure from '@/components/Failure'
+import NotFound from '@/components/NotFound'
 
 
 Vue.use(VueRouter)
@@ -29,6 +30,11 @@ const routes = [
     path: '/resultFailure',
     name: 'Failure',
     component: Failure
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound
   },
 
 
