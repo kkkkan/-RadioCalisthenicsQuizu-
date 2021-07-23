@@ -6,7 +6,11 @@
       </div>
     </draggable>
     <div>
-      <v-btn class="white--text" color="blue darken-4" v-on:click="startFunc">
+      <v-btn
+        class="mb-3 white--text"
+        color="blue darken-4"
+        v-on:click="startFunc"
+      >
         {{ button_name }}
       </v-btn>
     </div>
@@ -104,7 +108,9 @@ export default {
 <style scoped>
 .item {
   width: 20%;
-  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #7f7f7f;
   border-radius: 10px;
