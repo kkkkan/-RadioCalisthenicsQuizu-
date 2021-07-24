@@ -94,6 +94,35 @@ export default {
       answers: makeAnswerArray(this.$route.query.answer),
     };
   },
+  created() {
+    // 変なパラメーターが渡されてきていたら、エラー画面に飛ばす。
+
+    if (this.$route.query.answer == null) {
+      // パラメーターなしはおかしい
+      this.$router.push("/error");
+    }
+    // '_'で分ける
+    let _ids = this.$route.query.answer.split("_");
+    if (_ids.length != 13) {
+      // 13個になっていないとおかしい
+      this.$router.push("/error");
+    }
+    // 重複を除く
+    let ids = Array.from(new Set(_ids));
+    if (ids.length != 13) {
+      // そのうえでもまだ13個になっていないとおかしい
+      this.$router.push("/error");
+    }
+
+    for (var i = 0; i < ids.length; i++) {
+      var id = ids[i];
+      if (isNaN(id) || id < 1 || id > 13) {
+        // そして値が数値且つ範囲が1~13でないとおかしい
+        // isNaN(var) : varが数値だったらfalseを返すjavaScriptの関数
+        this.$router.push("/error");
+      }
+    }
+  },
 };
 </script>
 
