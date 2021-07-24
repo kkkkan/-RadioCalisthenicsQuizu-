@@ -91,7 +91,14 @@ export default {
           this.$router.push("/resultCorrect");
         } else {
           // 間違っていたら
-          this.$router.push("/resultFailure");
+          var answer = "";
+          for (var i = 0; i < this.items.length; i++) {
+            answer += this.items[i].id;
+            if (i < this.items.length - 1) {
+              answer += "_";
+            }
+          }
+          this.$router.push("/resultFailure?answer=" + answer);
         }
       }
     },

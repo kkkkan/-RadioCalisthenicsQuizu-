@@ -1,24 +1,44 @@
 <template>
   <div>
     <p class="mb-6 indigo--text font-weight-black text-h4">残念 不正解！！</p>
-    <p class="mb-6 indigo--text font-weight-medium">正解は以下です。</p>
 
     <div>
       <v-btn class="mb-6 white--text" color="blue darken-4" v-on:click="retry">
         もう一度遊ぶ
       </v-btn>
     </div>
+    <v-container>
+      <v-row>
+        <v-col>
+          <p class="mb-6 black--text text-h6">あなたの回答</p>
+          <ul>
+            <div
+              v-for="answerItem in answers"
+              :key="answerItem.id"
+              v-bind:class="[
+                answerItem.isCorrect === true ? 'correctItem' : 'incorrectItem',
+              ]"
+            >
+              {{ answerItem.name }}
+            </div>
+          </ul>
+        </v-col>
 
-    <ul>
-      <div v-for="item in items" :key="item.id" class="item">
-        {{ item.name }}
-      </div>
-    </ul>
+        <v-col>
+          <p class="mb-6 black--text text-h6">正解</p>
+          <ul>
+            <div v-for="item in items" :key="item.id" class="item">
+              {{ item.name }}
+            </div>
+          </ul>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
-// 正しい並び
+// 正しい並び。模範解答。
 let _rightItmes = [
   { id: 1, name: "伸びの運動" },
   { id: 2, name: "腕を振って脚を曲げ伸ばす運動" },
@@ -35,6 +55,28 @@ let _rightItmes = [
   { id: 13, name: "深呼吸" },
 ];
 
+/**
+ * 受け取ったユーザーの答えを{id:,name:,isCorrect}の連想配列をもつ配列にする
+ */
+function makeAnswerArray(answer) {
+  var ids = answer.split("_");
+  var answerArray = [];
+  console.log(ids);
+  for (var i = 0; i < ids.length; i++) {
+    var item = {};
+    for (var j = 0; j < _rightItmes.length; j++) {
+      if (_rightItmes[j].id == ids[i]) {
+        item = _rightItmes[j];
+        item["isCorrect"] = j == i;
+        break;
+      }
+    }
+    answerArray[i] = item;
+  }
+
+  return answerArray;
+}
+
 export default {
   name: "Failure",
   components: {},
@@ -49,6 +91,7 @@ export default {
         animation: 200,
       },
       items: _rightItmes,
+      answers: makeAnswerArray(this.$route.query.answer),
     };
   },
 };
@@ -56,8 +99,9 @@ export default {
 
 
 <style scoped>
+/*模範解答のアイテム */
 .item {
-  width: 20%;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
@@ -66,9 +110,38 @@ export default {
   border-radius: 10px;
   background-color: #ffffff;
 }
+/*ユーザーの答えのうち位置が正解だったアイテム */
+.correctItem {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #7f7f7f;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+/*ユーザーの答えのうち位置が間違いだったアイテム */
+.incorrectItem {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ff0000;
+  border-radius: 10px;
+  background-color: #ff000091;
+  color: #ffffff;
+}
 /* スマートフォンで見たとき */
 @media only screen and (max-width: 750px) {
   .item {
+    width: 80%;
+  }
+  .correctItem {
+    width: 80%;
+  }
+  .incorrectItem {
     width: 80%;
   }
 }
