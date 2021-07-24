@@ -3,9 +3,31 @@
     <p class="mb-6 indigo--text font-weight-black text-h4">残念 不正解！！</p>
 
     <div>
-      <v-btn class="mb-6 white--text" color="blue darken-4" v-on:click="retry">
-        もう一度遊ぶ
-      </v-btn>
+      <v-container>
+        <v-row>
+          <v-col class="d-flex justify-end">
+            <v-btn
+              class="mb-6 white--text"
+              color="green darken-1"
+              v-on:click="retry"
+            >
+              もう一度遊ぶ
+            </v-btn>
+          </v-col>
+
+          <v-col class="d-flex justify-start">
+            <!-- style="text-transform: none" -> アルファベットを大文字にしない  -->
+            <v-btn
+              class="mb-3 white--text"
+              color="blue darken-1"
+              v-on:click="shareByTwitter"
+              style="text-transform: none"
+            >
+              twitterで結果をシェア
+            </v-btn>
+          </v-col>
+        </v-row></v-container
+      >
     </div>
     <v-container>
       <v-row>
@@ -83,6 +105,29 @@ export default {
   methods: {
     retry: function () {
       this.$router.push("/");
+    },
+    shareByTwitter: function () {
+      // 現在のurlをエンコード
+      var url = encodeURIComponent(location.href);
+      // Twitter用のurl作成
+      var score = 0;
+      for (var i = 0; i < this.answers.length; i++) {
+        if (this.answers[i].isCorrect) {
+          score++;
+        }
+      }
+
+      let shareURL =
+        "https://twitter.com/intent/tweet?text=" +
+        "惜しい！13問中" +
+        score +
+        "問正解！あなたはラジオ体操を正しく並び替えられるかな？" +
+        "&hashtags=" +
+        "ラジオ体操を正しく並び替え" +
+        "&url=" +
+        url;
+
+      location.href = shareURL;
     },
   },
   data() {
