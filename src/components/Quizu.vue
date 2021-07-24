@@ -125,14 +125,7 @@ export default {
 /* スマートフォンで見たとき */
 @media only screen and (max-width: 750px) {
   .item {
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #7f7f7f;
-    border-radius: 10px;
-    background-color: #ffffff;
+    width: 80%;
   }
 }
 .item:hover {
