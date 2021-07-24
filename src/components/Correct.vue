@@ -41,7 +41,7 @@ export default {
     },
     shareByTwitter: function () {
       // 現在のurlをエンコード
-      var url = encodeURIComponent(location.href);
+      var url = "https://radio-calisthenics-quizu.netlify.app/";//encodeURIComponent(location.href);
       // Twitter用のurl作成
 
       let shareURL =
