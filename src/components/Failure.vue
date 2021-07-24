@@ -66,6 +66,12 @@ export default {
   border-radius: 10px;
   background-color: #ffffff;
 }
+/* スマートフォンで見たとき */
+@media only screen and (max-width: 750px) {
+  .item {
+    width: 80%;
+  }
+}
 .item:hover {
   cursor: grab;
 }
