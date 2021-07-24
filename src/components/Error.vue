@@ -4,6 +4,7 @@
     <p class="mb-6 indigo--text font-weight-medium">
       不正な挙動を検出しました。
     </p>
+    <img src="../assets/pose_tomeru_keisatsukan.png" />
   </div>
 </template>
 
