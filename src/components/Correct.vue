@@ -32,15 +32,9 @@
 </template>
 
 <script>
-function a() {}
 export default {
   name: "Correct",
   components: {},
-  data() {
-    return {
-      //twUrl: shareByTwitter(),
-    };
-  },
   methods: {
     retry: function () {
       this.$router.push("/");
