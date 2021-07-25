@@ -108,8 +108,8 @@ export default {
     return {
       items: _rightItmes,
       answers: makeAnswerArray(this.$route.query.answer),
-      shareTwTx: makeTwShareTx(makeAnswerArray(this.$route.query.answer)),
-      correctNum: countCorrectNum(makeAnswerArray(this.$route.query.answer)),
+      shareTwTx: "", // mounted()で初期化する
+      correctNum: 0, // mounted()で初期化する
     };
   },
   created() {
@@ -140,6 +140,12 @@ export default {
         this.$router.push("/error");
       }
     }
+  },
+  mounted() {
+    // data()のなかでは後ろの方に定義してもanswerの初期化が終わっていないようで
+    // this.answerではうまくいかずいちいちmakeAnswerArray(this.$route.query.answer)を渡すしかなかったのでmountedで初期化。
+    this.shareTwTx = makeTwShareTx(this.answers);
+    this.correctNum = countCorrectNum(this.answers);
   },
 };
 </script>
