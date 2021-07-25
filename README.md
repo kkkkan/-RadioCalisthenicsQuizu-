@@ -4,6 +4,7 @@
 
 # develop URL
 https://radio-calisthenics-quizu.netlify.app/
+(releaseブランチ)
 
 ## Build Setup
 
