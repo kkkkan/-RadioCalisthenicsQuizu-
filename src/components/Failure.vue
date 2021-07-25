@@ -3,55 +3,7 @@
     <p class="mb-6 indigo--text font-weight-black text-h4">残念 不正解！！</p>
 
     <div>
-      <v-container>
-        <v-row align="center">
-          <!--align="center"をつけると「もう一度遊ぶ」が縦方向中央に設置される-->
-          <v-col class="d-flex justify-end" cols="6">
-            <v-btn
-              class="mb-3 white--text"
-              color="brown darken-4"
-              v-on:click="retry"
-            >
-              もう一度遊ぶ
-            </v-btn>
-          </v-col>
-          <v-col class="justify-start" cols="6">
-            <v-row>
-              <!-- style="text-transform: none" -> アルファベットを大文字にしない  -->
-              <v-btn
-                class="mb-3 white--text"
-                color="blue darken-1"
-                v-on:click="shareByTwitter"
-                style="text-transform: none"
-              >
-                twitterで結果をシェア
-              </v-btn>
-            </v-row>
-            <v-row>
-              <!-- style="text-transform: none" -> アルファベットを大文字にしない  -->
-              <v-btn
-                class="mb-3 white--text"
-                color="deep-purple darken-4"
-                v-on:click="shareByFacebook"
-                style="text-transform: none"
-              >
-                Facebookで結果をシェア
-              </v-btn>
-            </v-row>
-            <v-row>
-              <!-- style="text-transform: none" -> アルファベットを大文字にしない  -->
-              <v-btn
-                class="mb-3 white--text"
-                color="green accent-4"
-                v-on:click="shareByLine"
-                style="text-transform: none"
-              >
-                LINEで結果をシェア
-              </v-btn>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
+      <retry-and-share-buttons :twShareText="shareTwTx" />
     </div>
     <v-container>
       <v-row>
@@ -84,6 +36,8 @@
 </template>
 
 <script>
+import RetryAndShareButtons from "../views/RetryAndShareButtons.vue";
+
 // 正しい並び。模範解答。
 let _rightItmes = [
   { id: 1, name: "伸びの運動" },
@@ -125,64 +79,29 @@ function makeAnswerArray(answer) {
   return answerArray;
 }
 
+function makeTwShareTx(answers) {
+  var score = 0;
+  for (var i = 0; i < answers.length; i++) {
+    if (answers[i].isCorrect) {
+      score++;
+    }
+  }
+  return (
+    "惜しい！13問中" +
+    score +
+    "問正解！あなたはラジオ体操を正しく並び替えられるかな？"
+  );
+}
+
 export default {
   name: "Failure",
-  components: {},
-  methods: {
-    retry: function () {
-      this.$router.push("/");
-    },
-    shareByTwitter: function () {
-      // 現在のurlをエンコード
-      var url = encodeURIComponent(location.href);
-      // Twitter用のurl作成
-      var score = 0;
-      for (var i = 0; i < this.answers.length; i++) {
-        if (this.answers[i].isCorrect) {
-          score++;
-        }
-      }
-
-      let shareURL =
-        "https://twitter.com/intent/tweet?text=" +
-        "惜しい！13問中" +
-        score +
-        "問正解！あなたはラジオ体操を正しく並び替えられるかな？" +
-        "&hashtags=" +
-        "ラジオ体操を正しく並び替え" +
-        "&url=" +
-        url;
-
-      location.href = shareURL;
-    },
-
-    shareByFacebook: function () {
-      // 現在のurlをエンコード
-      var url = encodeURIComponent(location.href);
-      // Twitter用のurl作成
-
-      let shareURL = "https://www.facebook.com/sharer/sharer.php?u=" + url;
-
-      location.href = shareURL;
-    },
-
-    shareByLine: function () {
-      // 現在のurlをエンコード
-      var url = encodeURIComponent(location.href);
-      // Twitter用のurl作成
-
-      let shareURL = "https://social-plugins.line.me/lineit/share?url=" + url;
-
-      location.href = shareURL;
-    },
-  },
+  components: { RetryAndShareButtons },
+  methods: {},
   data() {
     return {
-      options: {
-        animation: 200,
-      },
       items: _rightItmes,
       answers: makeAnswerArray(this.$route.query.answer),
+      shareTwTx: makeTwShareTx(makeAnswerArray(this.$route.query.answer)),
     };
   },
   created() {
