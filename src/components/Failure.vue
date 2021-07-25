@@ -108,7 +108,7 @@ export default {
     },
     shareByTwitter: function () {
       // 現在のurlをエンコード
-      var url = "https://radio-calisthenics-quizu.netlify.app/";//encodeURIComponent(location.href);
+      var url = encodeURIComponent(location.href);
       // Twitter用のurl作成
       var score = 0;
       for (var i = 0; i < this.answers.length; i++) {
