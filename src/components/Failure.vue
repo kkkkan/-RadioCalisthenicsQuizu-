@@ -112,8 +112,10 @@ function makeAnswerArray(answer) {
     var item = {};
     for (var j = 0; j < _rightItmes.length; j++) {
       if (_rightItmes[j].id == ids[i]) {
+        // "腕を振って脚を曲げ伸ばす運動"だけは２つあるので
         item = _rightItmes[j];
-        item["isCorrect"] = j == i;
+        item["isCorrect"] =
+          j == i || (j == 1 && i == 11) || (j == 11 && i == 1);
         break;
       }
     }
