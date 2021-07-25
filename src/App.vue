@@ -9,6 +9,19 @@
       <v-content id="content">
         <router-view />
       </v-content>
+      <v-footer color="deep-purple accent-4">
+        <!--全体を右寄せにする-->
+        <div class="flex-grow-1"></div>
+
+        <v-container class="mr-4 white--text">
+          <v-row justify="end">
+            <div>&copy; 2021 - {{ new Date().getFullYear() }} kkkkan</div>
+          </v-row>
+          <v-row justify="end">
+            <div>kan4649kan@gmail.com</div>
+          </v-row>
+        </v-container>
+      </v-footer>
     </v-app>
   </div>
 </template>
@@ -28,7 +41,7 @@ export default {
   color: #2c3e50;
 }
 
-#content{
+#content {
   margin-top: 20px;
 }
 </style>
