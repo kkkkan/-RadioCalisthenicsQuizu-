@@ -1,7 +1,9 @@
 <template>
   <div>
-    <p class="mb-6 indigo--text font-weight-black text-h4">残念 不正解！！</p>
-
+    <p class="mb-3 indigo--text font-weight-black text-h4">残念 不正解！！</p>
+    <p class="mb-6 indigo--text font-weight-black text-h4">
+      正解数 : {{ correctNum }}/13
+    </p>
     <div>
       <retry-and-share-buttons :twShareText="shareTwTx" />
     </div>
@@ -80,17 +82,22 @@ function makeAnswerArray(answer) {
 }
 
 function makeTwShareTx(answers) {
+  var score = countCorrectNum(answers);
+  return (
+    "惜しい！13問中" +
+    score +
+    "問正解！あなたはラジオ体操を正しく並び替えられるかな？"
+  );
+}
+
+function countCorrectNum(answers) {
   var score = 0;
   for (var i = 0; i < answers.length; i++) {
     if (answers[i].isCorrect) {
       score++;
     }
   }
-  return (
-    "惜しい！13問中" +
-    score +
-    "問正解！あなたはラジオ体操を正しく並び替えられるかな？"
-  );
+  return score;
 }
 
 export default {
@@ -102,6 +109,7 @@ export default {
       items: _rightItmes,
       answers: makeAnswerArray(this.$route.query.answer),
       shareTwTx: makeTwShareTx(makeAnswerArray(this.$route.query.answer)),
+      correctNum: countCorrectNum(makeAnswerArray(this.$route.query.answer)),
     };
   },
   created() {
